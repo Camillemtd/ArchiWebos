@@ -1,3 +1,7 @@
+
+/*création d'un projet*/
+let allposts = [];
+let posts = [];
 function createFigure(post) {
     const figure = document.createElement('figure');
     const imageElement = document.createElement('img')
@@ -10,10 +14,12 @@ function createFigure(post) {
     return figure
     
 }
+const gallery = document.querySelector('.gallery')
 
 async function fetchProjet() {
-    const gallery = document.querySelector('.gallery')
-    
+   
+    /*récupération de l'API*/
+
     const r = await fetch('http://localhost:5678/api/works', {
         method: 'GET',
         headers:{
@@ -21,19 +27,120 @@ async function fetchProjet() {
         }
         
     })
-    console.log(r);
+    
     if (!r.ok === true){
         throw new Error('Impossible de contacter le serveur')
         
     }
-    const posts = await r.json();
+    posts = await r.json();
+    allposts = posts;
     gallery.innerHTML = ('')
+    
+
+    /*Parcours ma réponse et crée les projets*/ 
+
     for (let post of posts){
         gallery.append(createFigure(post));
     }
+
+
     
 }
+
 fetchProjet()
+
+/* bouton pour les objets */
+const boutonObjetsFiltre = document.querySelector('#objets');
+boutonObjetsFiltre.addEventListener('click', function(){
+    backgroundBase();
+    backgroundfiltre(boutonObjetsFiltre);
+    const objetsFiltrer = allposts.filter(function(post){
+    return post.categoryId == '1'
+    });
+    console.log(objetsFiltrer);
+    gallery.innerHTML = ('');
+   for(let objets of objetsFiltrer){
+    gallery.append(createFigure(objets));
+   }
+    
+});  
+
+/*Bouton pour les appartements*/
+
+const boutonAppartementFiltre = document.querySelector('#appartements');
+boutonAppartementFiltre.addEventListener('click', function(){
+    backgroundBase();
+    backgroundfiltre(boutonAppartementFiltre);
+    const appartementsFiltrer = allposts.filter(function(post){
+        return post.categoryId == '2'
+    });
+    console.log(appartementsFiltrer);
+    gallery.innerHTML =('');
+    for (let appartements of appartementsFiltrer){
+        gallery.append(createFigure(appartements));
+    }
+});
+
+/*Bouton pour les hotels*/
+
+const boutonHôtelFiltre = document.querySelector('#hôtels');
+boutonHôtelFiltre.addEventListener('click', function(){
+    backgroundBase();
+    backgroundfiltre(boutonHôtelFiltre);
+    const hotelFiltrer = allposts.filter(function(post){
+        return post.categoryId == '3'
+    });
+    console.log(hotelFiltrer);
+    gallery.innerHTML = ('');
+    for (let hotel of hotelFiltrer){
+        gallery.append(createFigure(hotel))
+    }
+    
+});
+
+/*bouton tous*/
+
+const boutonTous = document.querySelector('#tous');
+boutonTous.addEventListener('click', function(){
+    backgroundBase();
+    backgroundfiltre(boutonTous);
+    gallery.innerHTML = ('');
+    for (let post of posts){
+        gallery.append(createFigure(post));
+    }
+
+})
+
+
+/*changement de backgroundfiltre*/
+function backgroundfiltre(elem){
+    elem.style.background = '#1D6154';
+    elem.style.color = 'white';
+}
+
+function backgroundBase(){
+    const buttonFilter = document.querySelectorAll('.buttonFilter');
+    for (let button of buttonFilter){
+        button.style.background = 'white';
+        button.style.color = '#1D6154';
+    }
+   
+}
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
