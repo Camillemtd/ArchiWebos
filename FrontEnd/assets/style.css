@@ -82,7 +82,8 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
+	
 }
 nav ul {
 	display: flex;
@@ -135,6 +136,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+	height: 460px;
 
 }
 /*CSS des boutton filtre*/
@@ -157,31 +159,31 @@ li:hover {
 	padding: 10px;
 	
 }
-#contact {
+#contact, .login {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+#contact > *, .login > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact h2, .login h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, .login form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input,.login input, .modal-wrapper input, .modal-wrapper select  {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label,.login label, .modal-wrapper label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -199,10 +201,290 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+.erreurLogin{
+	color: red;
+	visibility: hidden;
+}
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+.orga{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/*modal*/
+.js-modal{
+	padding: 0px;
+	height: 30px;
+	margin-bottom: 1em;
+	margin-left: 40px;
+	text-decoration: none;
+	color: black;
+}
+#lienModal1{
+	display:none;
+}
+
+.modal{
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	animation: fadeIn .3s both;
+}
+.modal-wrapper{
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	width:45%;
+	border-radius: 20px;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+	background-color: #fff;
+	animation: slideFromTop .5s both;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	
+}
+.modal[aria-hidden="true"]{
+	animation-name: fadeOut;
+}
+.modal[aria-hidden="true"] .modal-wrapper{
+	animation-name: slideToBottom;
+}
+
+@keyframes fadeIn {
+	from {opacity:0;}
+	to{opacity:1;}
+}
+@keyframes fadeOut {
+	from {opacity:1;}
+	to{opacity:0;}
+}
+@keyframes slideFromTop {
+	from {transform: translateY(-50px);}
+	to{transform: translateY(0px);}
+}
+@keyframes slideToBottom {
+	from {transform: translateY(0px);}
+	to{transform: translateY(-50px);}
+}
+.iconeModal{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0px 40px 0px 40px;
+}
+#js-modal-close{
+	width: 10px;
+	display: flex;
+	justify-content: flex-end;
+	cursor: pointer;
+	
+}
+
+#js-modal-return{
+	
+	cursor: pointer;
+}
+.galleryModal{
+	display: flex;
+	padding: 0;
+	margin-right: 15%;
+	margin-left: 15%;
+	width: 70%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+	
+}
+
+.imageModal{
+	width: 100%;
+	height:104px ;
+}
+.ligne{
+	width:70% ;
+	height: 0px;
+	border-top: solid 1px rgb(224, 220, 220);
+	align-self: center;
+	margin-top: 10px;
+
+}
+.buttonModal{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	padding-top: 15px;
+	cursor: pointer;
+
+}
+.supprModal{
+	color: #D65353;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.fa-trash-can{
+	margin-top: 5px;
+	margin-left: 5px;
+	position: absolute;
+	display: flex;
+	justify-self: end;
+	justify-content: center;
+	align-items: center;
+	font-size: 80%;
+	background-color: black;
+	color: white;
+	width: 13px;
+	height:13px;
+	cursor: pointer;
+}
+
+
+
+/*deuxieme page modal*/
+
+.ajouterPhoto{
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #E8F1F6;
+	width: 70%;
+	margin-left: 15%;
+	margin-right: 15%;
+	height: 170px;
+}
+.formPost{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.orgaModal{
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+}
+#image{
+	display: none;
+}
+.labelModal2{
+	
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #306685;
+	background-color: #CBD6DC;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor: pointer;
+	
+}
+#logoModal2{
+	font-size: 50px;
+	color:#CBD6DC ;
+}
+.descriptionInput{
+	color:#444444;
+}
+.formModal2{
+	display: flex;
+	flex-direction: column;
+	margin: 0px 100px 0px 100px;
+}
+.modal-wrapper select{
+	margin-bottom: 40px;
+}
+.buttonValider{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor: pointer;
+	border: #A7A7A7;
+	pointer-events:none;
+}
+.imageModal2{
+	position: absolute;
+	width: 25%;
+	height: 170px;
+	visibility: hidden;
+}
+.validation{
+	visibility: hidden;
+}
+.succes{
+	height: 20px;
+	width: 150px;
+	background: rgb(46, 170, 25);
+	color: white;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+	transition: 1s;
+
+}
+
+.modifierIntro{
+	visibility: hidden;
+	
+}
+.modifierImg{
+	margin-left: 60px;
+	visibility: hidden;
+}
+#logoEdition{
+	margin-right: 10px;
+}
+
+.buttonEdition{
+	background-color: white;
+	border: white;
+	border-radius: 50px;
+	height: 30px;
+	margin-left: 20px;
+}
+.edition{
+	position:fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	color:white;
+	margin-bottom: 50px;
+	visibility: hidden;
+	
 }
 
