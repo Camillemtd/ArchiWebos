@@ -3,7 +3,7 @@ let allposts = [];
 let posts = [];
 function createFigure(post) {
   const figure = document.createElement("figure");
-  figure.id=post.id;
+  figure.id = post.id;
   const imageElement = document.createElement("img");
   imageElement.src = post.imageUrl;
   imageElement.crossOrigin = "anonymous";
@@ -14,8 +14,8 @@ function createFigure(post) {
   return figure;
 }
 const gallery = document.querySelector(".gallery");
-
- async function fetchProjet() {
+//
+async function fetchProjet() {
   /*récupération de l'API*/
 
   const r = await fetch("http://localhost:5678/api/works", {
@@ -40,7 +40,7 @@ const gallery = document.querySelector(".gallery");
 }
 
 fetchProjet();
-export {fetchProjet}
+export { fetchProjet };
 
 /* bouton pour les objets */
 const boutonObjetsFiltre = document.querySelector("#objets");
@@ -64,11 +64,9 @@ boutonAppartementFiltre.addEventListener("click", function () {
   backgroundBase();
   backgroundfiltre(boutonAppartementFiltre);
   const appartementsFiltrer = allposts.filter(function (post) {
+    console.log(typeof post.categoryId);
 
-    console.log(typeof post.categoryId)
-    
     return post.categoryId === 2;
-    
   });
   console.log(appartementsFiltrer);
   gallery.innerHTML = "";
@@ -119,23 +117,21 @@ function backgroundBase() {
   }
 }
 
-const login = document.querySelector('#login');
+const login = document.querySelector("#login");
 
-login.addEventListener('click', function(){
-    location.href="login.html";
+login.addEventListener("click", function () {
+  location.href = "login.html";
 });
 
-
-// passage en mode édition 
-if(localStorage.getItem('token')){
-  document.querySelector('#login').innerText='logout'
-  document.querySelector('.filtre').innerHTML=('');
-  document.querySelector('#lienModal1').style.display= ('block');
-  document.querySelector('.edition').style.visibility=('visible');
-  document.querySelector('.modifierImg').style.visibility=('visible');
-  document.querySelector('.modifierIntro').style.visibility=('visible')
-  
+// passage en mode édition
+if (localStorage.getItem("token")) {
+  document.querySelector("#login").innerText = "logout";
+  document.querySelector(".filtre").innerHTML = "";
+  document.querySelector("#lienModal1").style.display = "block";
+  document.querySelector(".edition").style.visibility = "visible";
+  document.querySelector(".modifierImg").style.visibility = "visible";
+  document.querySelector(".modifierIntro").style.visibility = "visible";
 }
-document.querySelector('#login').addEventListener('click', function(){
-  localStorage.removeItem('token');
-})
+document.querySelector("#login").addEventListener("click", function () {
+  localStorage.removeItem("token");
+});
