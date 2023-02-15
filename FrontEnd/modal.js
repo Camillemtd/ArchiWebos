@@ -179,6 +179,7 @@ const categorie = document.querySelector("#category");
 const image = document.querySelector("#image");
 let formPost = document.querySelector(".formPost");
 let buttonValider = document.querySelector(".buttonValider");
+let message = document.querySelector(".messageError");
 
 formPost.addEventListener("change", () => {
   if (
@@ -188,39 +189,47 @@ formPost.addEventListener("change", () => {
   ) {
     buttonValider.style.pointerEvents = "initial";
     buttonValider.style.background = "#1D6154";
-    formPost.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const formData = new FormData(formPost);
-      fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        body: formData,
-        redirect: "manual",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-        },
-      }).then((res) => {
-        console.log(res.ok);
-        if (res.ok) {
-          // si le projet est envoyé je rappel mes fonction qui affiche les differents projets
-          document.querySelector(".galleryModal").innerHTML = "";
-          fetchProjetModal();
-          document.querySelector(".gallery").innerHTML = "";
-          fetchProjet();
-          // je remet mon formulaire à 0 pour pouvoir remettre un autre projet si souhaité
-          formPost.reset();
-          img.style.visibility = "hidden";
-          labelImage.style.visibility = "visible";
-          //message pour savoir si le projet a bien était crée
-          const validaion = document.querySelector(".validation");
-          validaion.classList.add("succes");
-          validaion.style.visibility = "visible";
-          setTimeout(() => {
-            validaion.style.visibility = "hidden";
-            validaion.classList.remove("succes");
-          }, 2000);
-        }
-      });
-    });
   }
+});
+
+formPost.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (
+    !title.value.length > 0 &&
+    !image.value.length > 0 &&
+    !categorie.value.length > 0
+  ) {
+    message.style.visibility = "visible";
+  }
+  const formData = new FormData(formPost);
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    body: formData,
+    redirect: "manual",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+    },
+  }).then((res) => {
+    if (res.ok) {
+      // si le projet est envoyé je rappel mes fonction qui affiche les differents projets
+      document.querySelector(".galleryModal").innerHTML = "";
+      fetchProjetModal();
+      document.querySelector(".gallery").innerHTML = "";
+      fetchProjet();
+      // je remet mon formulaire à 0 pour pouvoir remettre un autre projet si souhaité
+      formPost.reset();
+      img.style.visibility = "hidden";
+      labelImage.style.visibility = "visible";
+      //message pour savoir si le projet a bien était crée
+      const validaion = document.querySelector(".validation");
+      validaion.classList.add("succes");
+      validaion.style.visibility = "visible";
+      message.style.visibility = "hidden";
+      setTimeout(() => {
+        validaion.style.visibility = "hidden";
+        validaion.classList.remove("succes");
+      }, 2000);
+    }
+  });
 });
