@@ -161,7 +161,7 @@ li:hover {
 }
 #contact, .login {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > *, .login > * {
 	text-align: center;
@@ -216,6 +216,12 @@ footer nav ul {
 	align-items: center;
 	justify-content: center;
 }
+#login{
+	cursor: pointer;
+}
+#projets{
+	cursor: pointer;
+}
 /*modal*/
 .js-modal{
 	padding: 0px;
@@ -227,6 +233,7 @@ footer nav ul {
 }
 #lienModal1{
 	display:none;
+	cursor: pointer;
 }
 
 .modal{
@@ -291,6 +298,9 @@ footer nav ul {
 	cursor: pointer;
 	
 }
+.figureModal{
+	position: relative;
+}
 
 #js-modal-return{
 	
@@ -340,14 +350,13 @@ footer nav ul {
 	margin-bottom: 20px;
 }
 .fa-trash-can{
-	margin-top: 5px;
-	margin-left: 5px;
+	right: 5px;
+	top: 5px;
 	position: absolute;
 	display: flex;
-	justify-self: end;
-	justify-content: center;
 	align-items: center;
-	font-size: 80%;
+	justify-content: center;
+	font-size: 70%;
 	background-color: black;
 	color: white;
 	width: 13px;
@@ -426,9 +435,13 @@ footer nav ul {
 	border-radius: 60px ;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	cursor: pointer;
+	
 	border: #A7A7A7;
-	pointer-events:none;
+	cursor: pointer;
+}
+.messageError{
+	color: red;
+	visibility: hidden;
 }
 .imageModal2{
 	position: absolute;
@@ -454,8 +467,9 @@ footer nav ul {
 }
 
 .modifierIntro{
+	position: absolute;
 	visibility: hidden;
-	
+	top: 200px;
 }
 .modifierImg{
 	margin-left: 60px;
@@ -471,6 +485,7 @@ footer nav ul {
 	border-radius: 50px;
 	height: 30px;
 	margin-left: 20px;
+	padding: 0px 15px 0px 15px;
 }
 .edition{
 	position:fixed;
