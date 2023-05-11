@@ -9,6 +9,13 @@ projet.addEventListener("click", function () {
 function connexion() {
   const formulaireConnexion = document.querySelector(".formLogin");
   console.log(formulaireConnexion);
+  //fonction pour valider l'adresse mail 
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  }
+  let messageValideEmail = document.querySelector('.valideEmail')
+  
   formulaireConnexion.addEventListener("submit", async function (event) {
     event.preventDefault();
     //
@@ -16,6 +23,12 @@ function connexion() {
       email: event.target.querySelector("[name=email").value,
       password: event.target.querySelector("[name=password").value,
     };
+
+    const emailInput = document.querySelector('#email')
+    const email = emailInput.value
+    if (validateEmail(email)){
+      messageValideEmail.style.visibility= ('hidden');
+
     //envoie a l'api
     const result = await fetch("http://localhost:5678/api/users/login", {
       method: "POST",
@@ -32,6 +45,9 @@ function connexion() {
       const token = localStorage.getItem("token");
       location.href = "index.html";
     }
+  }else {
+    messageValideEmail.style.visibility= ('visible');
+  }
   });
 }
 

@@ -157,6 +157,7 @@ li:hover {
 	font-weight: bold;
 	margin-right: 10px;
 	padding: 10px;
+	cursor: pointer;
 	
 }
 #contact, .login {
@@ -221,6 +222,10 @@ footer nav ul {
 }
 #projets{
 	cursor: pointer;
+}
+.valideEmail{
+	color:red;
+	visibility: hidden;
 }
 /*modal*/
 .js-modal{
@@ -353,14 +358,12 @@ footer nav ul {
 	right: 5px;
 	top: 5px;
 	position: absolute;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	padding: 2px 0px 0px 1px;
 	font-size: 70%;
 	background-color: black;
 	color: white;
-	width: 13px;
-	height:13px;
+	width: 10px;
+	height:10px;
 	cursor: pointer;
 }
 
@@ -408,6 +411,10 @@ footer nav ul {
 	padding-bottom: 10px;
 	cursor: pointer;
 	
+}
+.valideFile{
+	color: red;
+	visibility: hidden;
 }
 #logoModal2{
 	font-size: 50px;
@@ -467,9 +474,9 @@ footer nav ul {
 }
 
 .modifierIntro{
-	position: absolute;
+	
 	visibility: hidden;
-	top: 200px;
+	
 }
 .modifierImg{
 	margin-left: 60px;

@@ -139,6 +139,7 @@ fetchProjetModal();
 // afficher l'image upload
 let labelImage = document.querySelector(".labelModal2");
 let img = document.querySelector(".imageModal2");
+let description = document.querySelector('.descriptionInput')
 const uploadImg = document.querySelector("#image");
 uploadImg.addEventListener("change", preview);
 function preview() {
@@ -149,6 +150,7 @@ function preview() {
     img.src = e.target.result;
     img.style.visibility = "visible";
     labelImage.style.visibility = "hidden";
+    description.style.visibility='hidden'
   });
 }
 
@@ -181,6 +183,29 @@ let formPost = document.querySelector(".formPost");
 let buttonValider = document.querySelector(".buttonValider");
 let message = document.querySelector(".messageError");
 
+// validation input file 
+function validateImageFiles(input) {
+  const allowedExtensions = /(\.png|\.jpeg)$/i;
+  const maxFileSize = 4 * 1024 * 1024; // 4 Mo
+
+  const files = input.files;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const extension = file.name.match(/\.[0-9a-z]+$/i)[0];
+
+    if (!allowedExtensions.test(extension)) {
+      return false; // L'extension du fichier n'est pas autorisée
+    }
+
+    if (file.size > maxFileSize) {
+      return false; // La taille du fichier est supérieure à la limite
+    }
+  }
+
+  return true; // Tous les fichiers sont valides
+}
+let valideInput = document.querySelector('.valideFile')
+
 formPost.addEventListener("change", () => {
   if (
     title.value.length > 0 &&
@@ -194,6 +219,8 @@ formPost.addEventListener("change", () => {
 
 formPost.addEventListener("submit", (event) => {
   event.preventDefault();
+  if(validateImageFiles(image)){
+    valideInput.style.visibility='hidden'
   if (
     !title.value.length > 0 &&
     !image.value.length > 0 &&
@@ -221,6 +248,7 @@ formPost.addEventListener("submit", (event) => {
       formPost.reset();
       img.style.visibility = "hidden";
       labelImage.style.visibility = "visible";
+      description.style.visibility="visible";
       //message pour savoir si le projet a bien était crée
       const validaion = document.querySelector(".validation");
       validaion.classList.add("succes");
@@ -232,4 +260,7 @@ formPost.addEventListener("submit", (event) => {
       }, 2000);
     }
   });
+}else {
+  valideInput.style.visibility='visible'
+}
 });
